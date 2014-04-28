@@ -147,36 +147,16 @@
     <edmx:ConceptualModels>
       <Schema Namespace="D3Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="D3Entities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="CurrentDayPickups" EntityType="D3Model.CurrentDayPickup" />
-          <EntitySet Name="CurrentDayRoutes" EntityType="D3Model.CurrentDayRoute" />
+          <EntitySet Name="CurrentDayPickups1" EntityType="D3Model.CurrentDayPickups" />
+          <EntitySet Name="CurrentDayRoutes1" EntityType="D3Model.CurrentDayRoutes" />
           <EntitySet Name="Customers" EntityType="D3Model.Customers" />
           <EntitySet Name="Drivers" EntityType="D3Model.Drivers" />
-          <EntitySet Name="PickupArchives" EntityType="D3Model.PickupArchive" />
-          <EntitySet Name="Pickups" EntityType="D3Model.Pickup" />
-          <EntitySet Name="Postings" EntityType="D3Model.Posting" />
-          <EntitySet Name="Route2" EntityType="D3Model.Route2" />
-          <AssociationSet Name="CurrentDayRouteDrivers" Association="D3Model.CurrentDayRouteDrivers">
-            <End Role="CurrentDayRoute" EntitySet="CurrentDayRoutes" />
-            <End Role="Drivers" EntitySet="Drivers" />
-          </AssociationSet>
-          <AssociationSet Name="Route2Drivers" Association="D3Model.Route2Drivers">
-            <End Role="Route2" EntitySet="Route2" />
-            <End Role="Drivers" EntitySet="Drivers" />
-          </AssociationSet>
-          <AssociationSet Name="CurrentDayPickupCustomers" Association="D3Model.CurrentDayPickupCustomers">
-            <End Role="CurrentDayPickup" EntitySet="CurrentDayPickups" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="PickupCustomers" Association="D3Model.PickupCustomers">
-            <End Role="Pickup" EntitySet="Pickups" />
-            <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="PickupRoute2" Association="D3Model.PickupRoute2">
-            <End Role="Pickup" EntitySet="Pickups" />
-            <End Role="Route2" EntitySet="Route2" />
-          </AssociationSet>
+          <EntitySet Name="ArchivedPickups" EntityType="D3Model.ArchivedPickups" />
+          <EntitySet Name="Pickups1" EntityType="D3Model.Pickups" />
+          <EntitySet Name="PostedMessages" EntityType="D3Model.PostedMessages" />
+          <EntitySet Name="Routes" EntityType="D3Model.Routes" />
         </EntityContainer>
-        <EntityType Name="CurrentDayPickup">
+        <EntityType Name="CurrentDayPickups">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -193,9 +173,8 @@
           <Property Name="IsDispatched" Type="Boolean" Nullable="false" />
           <Property Name="DispatchTime" Type="DateTime" Precision="3" />
           <Property Name="Notes" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Customer" Relationship="D3Model.CurrentDayPickupCustomers" FromRole="CurrentDayPickup" ToRole="Customers" />
         </EntityType>
-        <EntityType Name="CurrentDayRoute">
+        <EntityType Name="CurrentDayRoutes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -205,7 +184,6 @@
           <Property Name="DriverId" Type="String" MaxLength="4" Unicode="true" FixedLength="false" />
           <Property Name="DriverName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="DriverMessage" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Driver" Relationship="D3Model.CurrentDayRouteDrivers" FromRole="CurrentDayRoute" ToRole="Drivers" />
         </EntityType>
         <EntityType Name="Customers">
           <Key>
@@ -223,8 +201,6 @@
           <Property Name="Comment" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
           <Property Name="DefaultRouteId" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
           <Property Name="InfoString" Type="String" MaxLength="255" Unicode="true" FixedLength="true" />
-          <NavigationProperty Name="CurrentDayPickup" Relationship="D3Model.CurrentDayPickupCustomers" FromRole="Customers" ToRole="CurrentDayPickup" />
-          <NavigationProperty Name="Pickup" Relationship="D3Model.PickupCustomers" FromRole="Customers" ToRole="Pickup" />
         </EntityType>
         <EntityType Name="Drivers">
           <Key>
@@ -235,19 +211,8 @@
           <Property Name="LastName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="FirstName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="MiddleInitial" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
-          <Property Name="DriverSyncID" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="DriverCreatedBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="DriverCreatedTime" Type="DateTime" Precision="3" />
-          <Property Name="DriverEditedBy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="DriverEditedTime" Type="DateTime" Precision="3" />
-          <Property Name="DriverSent" Type="Boolean" />
-          <Property Name="DriverSentTime" Type="DateTime" Precision="3" />
-          <Property Name="DriverSendConfirmed" Type="Boolean" />
-          <Property Name="DriverReceivedTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CurrentDayRoute" Relationship="D3Model.CurrentDayRouteDrivers" FromRole="Drivers" ToRole="CurrentDayRoute" />
-          <NavigationProperty Name="Route2" Relationship="D3Model.Route2Drivers" FromRole="Drivers" ToRole="Route2" />
-        </EntityType>
-        <EntityType Name="PickupArchive">
+          </EntityType>
+        <EntityType Name="ArchivedPickups">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -265,7 +230,7 @@
           <Property Name="Deleted" Type="Boolean" />
           <Property Name="Notes" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Pickup">
+        <EntityType Name="Pickups">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -285,10 +250,8 @@
           <Property Name="Dispatched" Type="Boolean" />
           <Property Name="DispatchTime" Type="DateTime" Precision="3" />
           <Property Name="Notes" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Customer" Relationship="D3Model.PickupCustomers" FromRole="Pickup" ToRole="Customers" />
-          <NavigationProperty Name="Route2" Relationship="D3Model.PickupRoute2" FromRole="Pickup" ToRole="Route2" />
         </EntityType>
-        <EntityType Name="Posting">
+        <EntityType Name="PostedMessages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -301,7 +264,7 @@
           <Property Name="PreviousRouteID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="isDragnDrop" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="Route2">
+        <EntityType Name="Routes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -310,37 +273,15 @@
           <Property Name="RouteName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
           <Property Name="DriverId" Type="String" MaxLength="4" Unicode="true" FixedLength="false" />
           <Property Name="DriverMessage" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="Driver" Relationship="D3Model.Route2Drivers" FromRole="Route2" ToRole="Drivers" />
-          <NavigationProperty Name="Pickup" Relationship="D3Model.PickupRoute2" FromRole="Route2" ToRole="Pickup" />
         </EntityType>
-        <Association Name="CurrentDayRouteDrivers">
-          <End Type="D3Model.CurrentDayRoute" Role="CurrentDayRoute" Multiplicity="1" />
-          <End Type="D3Model.Drivers" Role="Drivers" Multiplicity="0..1" />
-        </Association>
-        <Association Name="Route2Drivers">
-          <End Type="D3Model.Route2" Role="Route2" Multiplicity="1" />
-          <End Type="D3Model.Drivers" Role="Drivers" Multiplicity="0..1" />
-        </Association>
-        <Association Name="CurrentDayPickupCustomers">
-          <End Type="D3Model.CurrentDayPickup" Role="CurrentDayPickup" Multiplicity="1" />
-          <End Type="D3Model.Customers" Role="Customers" Multiplicity="1" />
-        </Association>
-        <Association Name="PickupCustomers">
-          <End Type="D3Model.Pickup" Role="Pickup" Multiplicity="1" />
-          <End Type="D3Model.Customers" Role="Customers" Multiplicity="1" />
-        </Association>
-        <Association Name="PickupRoute2">
-          <End Type="D3Model.Pickup" Role="Pickup" Multiplicity="1" />
-          <End Type="D3Model.Route2" Role="Route2" Multiplicity="1" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="D3ModelStoreContainer" CdmEntityContainer="D3Entities">
-    <EntitySetMapping Name="CurrentDayPickups">
-      <EntityTypeMapping TypeName="IsTypeOf(D3Model.CurrentDayPickup)">
+    <EntitySetMapping Name="CurrentDayPickups1">
+      <EntityTypeMapping TypeName="IsTypeOf(D3Model.CurrentDayPickups)">
         <MappingFragment StoreEntitySet="CurrentDayPickups">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RouteId" ColumnName="RouteId" />
@@ -358,8 +299,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CurrentDayRoutes">
-      <EntityTypeMapping TypeName="IsTypeOf(D3Model.CurrentDayRoute)">
+    <EntitySetMapping Name="CurrentDayRoutes1">
+      <EntityTypeMapping TypeName="IsTypeOf(D3Model.CurrentDayRoutes)">
         <MappingFragment StoreEntitySet="CurrentDayRoutes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RouteKey" ColumnName="RouteKey" />
@@ -388,7 +329,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Drivers1">
+    <EntitySetMapping Name="Drivers">
       <EntityTypeMapping TypeName="IsTypeOf(D3Model.Drivers)">
         <MappingFragment StoreEntitySet="Drivers">
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -396,20 +337,11 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="MiddleInitial" ColumnName="MiddleInitial" />
-          <ScalarProperty Name="DriverSyncID" ColumnName="DriverSyncID" />
-          <ScalarProperty Name="DriverCreatedBy" ColumnName="DriverCreatedBy" />
-          <ScalarProperty Name="DriverCreatedTime" ColumnName="DriverCreatedTime" />
-          <ScalarProperty Name="DriverEditedBy" ColumnName="DriverEditedBy" />
-          <ScalarProperty Name="DriverEditedTime" ColumnName="DriverEditedTime" />
-          <ScalarProperty Name="DriverSent" ColumnName="DriverSent" />
-          <ScalarProperty Name="DriverSentTime" ColumnName="DriverSentTime" />
-          <ScalarProperty Name="DriverSendConfirmed" ColumnName="DriverSendConfirmed" />
-          <ScalarProperty Name="DriverReceivedTime" ColumnName="DriverReceivedTime" />
-        </MappingFragment>
+          </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PickupArchives">
-      <EntityTypeMapping TypeName="IsTypeOf(D3Model.PickupArchive)">
+    <EntitySetMapping Name="ArchivedPickups">
+      <EntityTypeMapping TypeName="IsTypeOf(D3Model.ArchivedPickups)">
         <MappingFragment StoreEntitySet="PickupArchives">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DefaultRouteID" ColumnName="DefaultRouteID" />
@@ -427,8 +359,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Pickups">
-      <EntityTypeMapping TypeName="IsTypeOf(D3Model.Pickup)">
+    <EntitySetMapping Name="Pickups1">
+      <EntityTypeMapping TypeName="IsTypeOf(D3Model.Pickups)">
         <MappingFragment StoreEntitySet="Pickups">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DefaultRouteId" ColumnName="DefaultRouteId" />
@@ -449,8 +381,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Postings">
-      <EntityTypeMapping TypeName="IsTypeOf(D3Model.Posting)">
+    <EntitySetMapping Name="PostedMessages">
+      <EntityTypeMapping TypeName="IsTypeOf(D3Model.PostedMessages)">
         <MappingFragment StoreEntitySet="Postings">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DataType" ColumnName="DataType" />
@@ -463,8 +395,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Route2">
-      <EntityTypeMapping TypeName="IsTypeOf(D3Model.Route2)">
+    <EntitySetMapping Name="Routes">
+      <EntityTypeMapping TypeName="IsTypeOf(D3Model.Routes)">
         <MappingFragment StoreEntitySet="Route2">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RouteKey" ColumnName="RouteKey" />
@@ -489,7 +421,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

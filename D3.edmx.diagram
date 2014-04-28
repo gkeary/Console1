@@ -5,19 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e4a49568e5b142b4b74442367f09f8ab" Name="Diagram1">
-        <EntityTypeShape EntityType="D3Model.CurrentDayPickup" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" FillColor="Lime" />
-        <EntityTypeShape EntityType="D3Model.CurrentDayRoute" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" FillColor="Lime" />
-        <EntityTypeShape EntityType="D3Model.Customers" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" FillColor="Gold" />
-        <EntityTypeShape EntityType="D3Model.Drivers" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" FillColor="Gold" />
-        <EntityTypeShape EntityType="D3Model.PickupArchive" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="D3Model.Pickup" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="D3Model.Posting" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="D3Model.Route2" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" FillColor="Maroon" />
-        <AssociationConnector Association="D3Model.CurrentDayRouteDrivers" />
-        <AssociationConnector Association="D3Model.Route2Drivers" />
-        <AssociationConnector Association="D3Model.CurrentDayPickupCustomers" />
-        <AssociationConnector Association="D3Model.PickupCustomers" />
-        <AssociationConnector Association="D3Model.PickupRoute2" />
+        <EntityTypeShape EntityType="D3Model.CurrentDayPickups" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" FillColor="Green" />
+        <EntityTypeShape EntityType="D3Model.CurrentDayRoutes" Width="1.75" PointX="2.75" PointY="0.75" IsExpanded="true" FillColor="Green" />
+        <EntityTypeShape EntityType="D3Model.Customers" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" FillColor="Goldenrod" />
+        <EntityTypeShape EntityType="D3Model.Drivers" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" FillColor="Goldenrod" />
+        <EntityTypeShape EntityType="D3Model.ArchivedPickups" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="D3Model.Pickups" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="D3Model.PostedMessages" Width="1.875" PointX="6.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="D3Model.Routes" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" FillColor="Maroon" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

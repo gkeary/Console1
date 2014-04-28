@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 04/27/2014 10:47:55
--- Generated from EDMX file: F:\PullFromGithub\D3\D3Model\Console1\D3.edmx
+-- Date Created: 04/28/2014 08:09:01
+-- Generated from EDMX file: E:\wip\D3EntityFramework\D3.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,21 +17,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_CurrentDayRouteDrivers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Drivers] DROP CONSTRAINT [FK_CurrentDayRouteDrivers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Route2Drivers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Drivers] DROP CONSTRAINT [FK_Route2Drivers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CurrentDayPickupCustomers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CurrentDayPickups] DROP CONSTRAINT [FK_CurrentDayPickupCustomers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PickupCustomers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Pickups] DROP CONSTRAINT [FK_PickupCustomers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PickupRoute2]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Pickups] DROP CONSTRAINT [FK_PickupRoute2];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -80,8 +65,7 @@ CREATE TABLE [dbo].[CurrentDayPickups] (
     [Comment] nvarchar(30)  NULL,
     [IsDispatched] bit  NOT NULL,
     [DispatchTime] datetime  NULL,
-    [Notes] nvarchar(3)  NULL,
-    [Customer_Id] int  NOT NULL
+    [Notes] nvarchar(3)  NULL
 );
 GO
 
@@ -128,9 +112,7 @@ CREATE TABLE [dbo].[Drivers] (
     [DriverSent] bit  NULL,
     [DriverSentTime] datetime  NULL,
     [DriverSendConfirmed] bit  NULL,
-    [DriverReceivedTime] datetime  NULL,
-    [CurrentDayRoute_Id] int  NOT NULL,
-    [Route2_Id] int  NOT NULL
+    [DriverReceivedTime] datetime  NULL
 );
 GO
 
@@ -169,9 +151,7 @@ CREATE TABLE [dbo].[Pickups] (
     [Friday] bit  NULL,
     [Dispatched] bit  NULL,
     [DispatchTime] datetime  NULL,
-    [Notes] nvarchar(3)  NULL,
-    [Customer_Id] int  NOT NULL,
-    [Route2_Id] int  NOT NULL
+    [Notes] nvarchar(3)  NULL
 );
 GO
 
@@ -253,76 +233,6 @@ GO
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [CurrentDayRoute_Id] in table 'Drivers'
-ALTER TABLE [dbo].[Drivers]
-ADD CONSTRAINT [FK_CurrentDayRouteDrivers]
-    FOREIGN KEY ([CurrentDayRoute_Id])
-    REFERENCES [dbo].[CurrentDayRoutes]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CurrentDayRouteDrivers'
-CREATE INDEX [IX_FK_CurrentDayRouteDrivers]
-ON [dbo].[Drivers]
-    ([CurrentDayRoute_Id]);
-GO
-
--- Creating foreign key on [Route2_Id] in table 'Drivers'
-ALTER TABLE [dbo].[Drivers]
-ADD CONSTRAINT [FK_Route2Drivers]
-    FOREIGN KEY ([Route2_Id])
-    REFERENCES [dbo].[Route2]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_Route2Drivers'
-CREATE INDEX [IX_FK_Route2Drivers]
-ON [dbo].[Drivers]
-    ([Route2_Id]);
-GO
-
--- Creating foreign key on [Customer_Id] in table 'CurrentDayPickups'
-ALTER TABLE [dbo].[CurrentDayPickups]
-ADD CONSTRAINT [FK_CurrentDayPickupCustomers]
-    FOREIGN KEY ([Customer_Id])
-    REFERENCES [dbo].[Customers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CurrentDayPickupCustomers'
-CREATE INDEX [IX_FK_CurrentDayPickupCustomers]
-ON [dbo].[CurrentDayPickups]
-    ([Customer_Id]);
-GO
-
--- Creating foreign key on [Customer_Id] in table 'Pickups'
-ALTER TABLE [dbo].[Pickups]
-ADD CONSTRAINT [FK_PickupCustomers]
-    FOREIGN KEY ([Customer_Id])
-    REFERENCES [dbo].[Customers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PickupCustomers'
-CREATE INDEX [IX_FK_PickupCustomers]
-ON [dbo].[Pickups]
-    ([Customer_Id]);
-GO
-
--- Creating foreign key on [Route2_Id] in table 'Pickups'
-ALTER TABLE [dbo].[Pickups]
-ADD CONSTRAINT [FK_PickupRoute2]
-    FOREIGN KEY ([Route2_Id])
-    REFERENCES [dbo].[Route2]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PickupRoute2'
-CREATE INDEX [IX_FK_PickupRoute2]
-ON [dbo].[Pickups]
-    ([Route2_Id]);
-GO
 
 -- --------------------------------------------------
 -- Script has ended

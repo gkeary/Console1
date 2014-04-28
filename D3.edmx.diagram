@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e4a49568e5b142b4b74442367f09f8ab" Name="Diagram1">
+        <EntityTypeShape EntityType="D3Model.CurrentDayPickup" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="D3Model.CurrentDayRoute" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="D3Model.Customers" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" FillColor="Gold" />
+        <EntityTypeShape EntityType="D3Model.Drivers" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" FillColor="Gold" />
+        <EntityTypeShape EntityType="D3Model.PickupArchive" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="D3Model.Pickup" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="D3Model.Posting" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="D3Model.Route2" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" FillColor="Maroon" />
+        <AssociationConnector Association="D3Model.CurrentDayRouteDrivers" />
+        <AssociationConnector Association="D3Model.Route2Drivers" />
+        <AssociationConnector Association="D3Model.CurrentDayPickupCustomers" />
+        <AssociationConnector Association="D3Model.PickupCustomers" />
+        <AssociationConnector Association="D3Model.PickupRoute2" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

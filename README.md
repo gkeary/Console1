@@ -16,6 +16,13 @@ Examine the D3 Structure
 Modify it.
 Populate D3 from D2_VT
 
+How to Create Navigation properties && Foreign keys
+===============================================
+
+Do not create Navigation properties and name them yourself.  Create Association(s) instead.
+E.g.  Routes must have a driver.  So Create an association between Route and Driver; make it 1:1
+The diagram will make the appropriate Navigation propertiesfor you.
+
 
 
 

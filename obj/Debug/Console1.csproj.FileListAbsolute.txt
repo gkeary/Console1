@@ -1,2 +1,6 @@
 E:\wip\D3EntityFramework\bin\Debug\Console1.exe.config
 E:\wip\D3EntityFramework\obj\Debug\Console1.csprojResolveAssemblyReference.cache
+E:\wip\D3EntityFramework\bin\Debug\Console1.exe
+E:\wip\D3EntityFramework\bin\Debug\Console1.pdb
+E:\wip\D3EntityFramework\obj\Debug\Console1.exe
+E:\wip\D3EntityFramework\obj\Debug\Console1.pdb
